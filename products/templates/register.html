@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+
+<div class="container">
+    <div class="mt-5 pt-4">
+        {% if request.user.is_authenticated %}
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+             Hi! {{ request.user }} you already have an account. <br> Log out to create a new account
+                <hr>
+             <a class="btn btn-primary" role="button" aria-pressed="true" href="{% url 'product_urls:logout-page' %}">Log Out</a>
+            </div>
+        {% else %}
+    </div>
+</div>
+
+<form class="signup-form" method="post">
+    {% csrf_token %}
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {% for field in form %}
+            <p>
+                {{ field.label_tag }}<br>
+                {{ field }}
+                {% if field.help_text %}
+                <small style="color: grey">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                {% endfor %}
+            </p>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <!--{{form.as_p}}-->
+    <button type="submit" name="CreateUserForm" class="btn btn-primary">Sign in</button>
+</form>
+
+<script>
+    var form_fields=document.getElementsByTagName('input')
+    for(var field in form_fields){
+        form_fields[field].className+='form-control'
+    }
+
+
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+
+</style>
+<div class="container">
+    <div class="mt-5 pt-4">
+        {% if 'next' in request.GET %}
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+             Hi! {{ request.user }} you need to login first
+                <hr>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container">
+    <div class="mt-5 pt-4">
+        {% if request.user.is_authenticated %}
+
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+              Hi! {{ request.user }} you have already logged in
+                <hr>
+              <a class="btn btn-primary" role="button" aria-pressed="true" href="{% url 'product_urls:logout-page' %}">Log Out</a>
+            </div>
+        {% else %}
+    </div>
+</div>
+<div class="bg-light col-md-4" style="margin: 0 auto; float: none; margin-bottom: 10px;">
+    <span style="font-size:100px; color:#626567;"><center><i class="fas fa-cookie-bite"></i></center></span>
+<div class="p-4">
+<form class="form-signin" method="post"><!--action="{% url 'product_urls:home-page' %}"-->
+    {% csrf_token %}
+   <div class="col">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control p-4" name="username">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control p-4" name="password">
+    </div>
+
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Sign In</button>
+   </div>
+    {% for message in messages %}
+    <p id="message">{{message}}</p>
+    {% endfor %}
+</form>
+</div>
+</div>
+
+{% endif %}
+{% endblock %}
