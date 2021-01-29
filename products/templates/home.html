@@ -1,0 +1,1267 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+
+
+<style>
+#btnCategories{
+visibility:visible;
+}
+
+
+.img-top {
+    width: 100%;
+    object-fit: cover;
+
+}
+
+.carousel-item{
+	height:30vw;
+}
+
+h2 {
+	color: #000;
+	font-size: 26px;
+	font-weight: 300;
+	text-align: center;
+	text-transform: uppercase;
+	position: relative;
+	margin: 30px 0 80px;
+}
+h2 b {
+	color: #5c701f;
+}
+h2::after {
+	content: "";
+	width: 100px;
+	position: absolute;
+	margin: 0 auto;
+	height: 4px;
+	background: rgb(0, 0, 0, 0.2);
+	left: 0;
+	right: 0;
+	bottom: -20px;
+}
+.carousel {
+	margin: 50px auto;
+	padding: 0 5%;
+}
+.carousel .carousel-item {
+	min-height: 35vw;
+	text-align: center;
+	overflow: hidden;
+}
+
+
+#content-box{
+	padding-top:50px;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+.carousel .carousel-item {
+	min-height: 60vw; }
+
+#content-box{
+	padding-top:0px;
+}
+
+
+}
+
+@media only screen and (min-width: 600px) {
+.carousel .carousel-item {
+	min-height: 50vw; }
+
+}
+
+@media only screen and (min-width: 1200px) {
+.carousel .carousel-item {
+	min-height: 35vw; }
+
+}
+
+
+.carousel .carousel-item .img-box {
+	height: 160px;
+	width: 100%;
+	position: relative;
+}
+
+.carousel .carousel-item img {
+	max-width: 100%;
+	max-height: 100%;
+	display: inline-block;
+	position: absolute;
+	bottom: 0;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+}
+.carousel .carousel-item h4 {
+	font-size: 18px;
+	margin: 10px 0;
+}
+
+.carousel .carousel-item .btn:hover, .carousel .carousel-item .btn:focus {
+	color: #fff;
+	background: #000;
+	border-color: #000;
+	box-shadow: none;
+}
+
+.carousel .thumb-wrapper {
+	text-align: center;
+}
+.carousel .thumb-content {
+	padding: 15px;
+}
+
+
+.carousel .item-price {
+	font-size: 13px;
+	padding: 2px 0;
+}
+.carousel .item-price strike {
+	color: #999;
+	margin-right: 5px;
+}
+.carousel .item-price span {
+	color: #86bd57;
+	font-size: 110%;
+}
+
+
+.carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+#sidebar ul li a {
+    padding: 10px 0;
+    display: block;
+    color: black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    text-decoration:none;
+}
+#sidebar ul li {
+    font-size: 14px;
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    font-weight: normal;
+    background: #fff;
+}
+
+#sidebar {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Stay on top */
+  top: 0;
+  left: 0;
+
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  box-shadow: 0 0 10px 0px #111;
+}
+
+#sidebar .closebtn {
+  position: absolute;
+  top: 50px;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.context-dark, .bg-gray-dark, .bg-primary {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+
+.nav-list li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+
+.nav-list li {
+	border: 1px solid #A6ACAF;
+	border-radius:5px;
+	padding:5px;
+	margin:2px;
+	float: left;
+}
+}
+
+.nav-list li a:hover:before {
+    margin-left: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+
+
+
+
+.nav-list li a:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f054";
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: -15px;
+    margin-right: 7px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .22s ease;
+}
+
+
+.Icons ul {
+    list-style: none;
+    margin: 50px 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+.Icons ul li {
+    width: 15%;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 15px;
+    flex: 0 0 33.3333%;
+    white-space: nowrap;
+    text-overflow: clip;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+.Icons ul li {
+    width: 15%;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 20px;
+    flex: 0 0 25%;
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+.Icons ul li {
+    width: 15%;
+    flex-basis: 15%;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+ }
+
+.Icons ul li:hover a {
+    color: #798687 !important
+}
+
+
+.Icons ul li a:last-child {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+
+.btn-mod {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 130px;
+    margin: 0 auto;
+    max-width: 130px;
+    text-transform: uppercase;
+    border: 1px solid currentColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: .3s linear;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+.btn-mod {
+    width: 50%;
+    height: 65px;
+}
+}
+
+
+.btn-mod:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.171);
+}
+
+.btn-mod img {
+    transition: .3s linear;
+    height: 70px;
+    position: relative;
+    z-index: 2;
+    opacity: .8;
+}
+
+@media only screen and (max-width: 600px) {
+
+.btn-mod img {
+    height: 50px;
+}
+}
+
+.btn-mod:hover img {
+    -webkit-filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1);
+    opacity: 1;
+}
+
+.btn-1 {
+    color: #c1913a;
+}
+
+.btn-1:before,
+.btn-1:after,
+.btn-1 span:before,
+.btn-1 span:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: rgba(109, 76, 14, 0.25);
+    -webkit-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
+}
+
+.btn-1:after,
+.btn-1 span:before {
+    top: auto;
+    bottom: 0;
+}
+
+.btn-1 span:before,
+.btn-1 span:after {
+    -webkit-transition-delay: 0.4s;
+    transition-delay: 0.4s;
+}
+
+.btn-1:hover {
+    color: #eddfc5;
+}
+
+.btn-1:hover:before,
+.btn-1:hover:after,
+.btn-1:hover span:before,
+.btn-1:hover span:after {
+    height: 124px;
+}
+
+.btn-1:active {
+    background-color: #b67e17;
+}
+
+.btn-10 {
+    color: #3a416d;
+}
+
+.btn-10:before,
+.btn-10:after,
+.btn-10 span:before,
+.btn-10 span:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgba(14, 19, 50, 0.25);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.btn-10:after,
+.btn-10 span:before {
+    left: auto;
+    right: 0;
+}
+
+.btn-10 span:before,
+.btn-10 span:after {
+    -webkit-transition-delay: 0.4s;
+    transition-delay: 0.4s;
+}
+
+.btn-10:hover {
+    color: #c5c7d4;
+}
+
+.btn-10:hover:before,
+.btn-10:hover:after,
+.btn-10:hover span:before,
+.btn-10:hover span:after {
+    width: 250px;
+}
+
+.btn-10:active {
+    background-color: #172053;
+}
+
+@-webkit-keyframes criss-cross-left {
+    0% {
+        left: -20px;
+    }
+    50% {
+        left: 50%;
+        width: 20px;
+        height: 20px;
+    }
+    100% {
+        left: 50%;
+        width: 375px;
+        height: 375px;
+    }
+}
+
+@keyframes criss-cross-left {
+    0% {
+        left: -20px;
+    }
+    50% {
+        left: 50%;
+        width: 20px;
+        height: 20px;
+    }
+    100% {
+        left: 50%;
+        width: 375px;
+        height: 375px;
+    }
+}
+
+@-webkit-keyframes criss-cross-right {
+    0% {
+        right: -20px;
+    }
+    50% {
+        right: 50%;
+        width: 20px;
+        height: 20px;
+    }
+    100% {
+        right: 50%;
+        width: 375px;
+        height: 375px;
+    }
+}
+
+@keyframes criss-cross-right {
+    0% {
+        right: -20px;
+    }
+    50% {
+        right: 50%;
+        width: 20px;
+        height: 20px;
+    }
+    100% {
+        right: 50%;
+        width: 375px;
+        height: 375px;
+    }
+}
+
+.btn-11 {
+    position: relative;
+    color: #576db7;
+}
+
+.btn-11:before,
+.btn-11:after {
+    position: absolute;
+    top: 50%;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: #3953aa;
+    border-radius: 50%;
+}
+
+.btn-11:before {
+    left: -20px;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.btn-11:after {
+    right: -20px;
+    -webkit-transform: translate(50%, -50%);
+    transform: translate(50%, -50%);
+}
+
+.btn-11:hover {
+    color: #ced4ea;
+}
+
+.btn-11:hover:before {
+    -webkit-animation: criss-cross-left 0.8s both;
+    animation: criss-cross-left 0.8s both;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+}
+
+.btn-11:hover:after {
+    -webkit-animation: criss-cross-right 0.8s both;
+    animation: criss-cross-right 0.8s both;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+}
+
+
+
+/* ------------------- Carousel Styling ------------------- */
+
+.carousel-inner {
+  border-radius: 15px;
+}
+
+.carousel-caption {
+  background-color: rgba(0,0,0,.5);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  padding: 0 0 10px 25px;
+  color: #fff;
+  text-align: left;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  z-index: 15;
+  margin: 0;
+  padding: 0 25px 25px 0;
+  text-align: right;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+  background-image: none;
+}
+
+
+/* ------------------- Section Styling - Not needed for carousel styling ------------------- */
+
+.section-white {
+   padding: 10px 0;
+}
+
+.section-white {
+  background-color: #fff;
+  color: #555;
+}
+
+@media screen and (min-width: 768px) {
+
+  .section-white {
+     padding: 1.5em 0;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+
+  .container {
+    max-width: 930px;
+  }
+
+}
+
+
+<!---footer-->
+
+@media only screen and (min-width: 600px) {
+#LogoContainer{
+ margin-left:50px;
+}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+#LogoContainer{
+ margin-left:50px;
+}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+#LogoContainer{
+ margin-left:75px;
+}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+#LogoContainer{
+ margin-left:100px;
+}
+}
+</style>
+
+
+<script>
+  $('.carousel').carousel({
+  interval: 2000
+})
+
+/*$('body').append('<div class="spinner-border text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>');
+$(window).on('load', function(){
+  setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+});
+function removeLoader(){
+    $( "#loadingDiv" ).fadeOut(500, function() {
+      // fadeOut complete. Remove the loading div
+      $( "#loadingDiv" ).remove(); //makes page more lightweight
+  });
+}*/
+
+</script>
+
+
+ <div id="content-box">
+      <!-- Page Content  -->
+
+
+
+      <nav id="sidebar" class="bg-light">
+
+				<div class="m-5 pt-5">
+					<h5>Categories</h5>
+
+	        <ul class="list-unstyled components mb-5">
+			  {% for category in categories %}
+	          <li>
+	            <a href="{% url 'product_urls:category-page' category.title %}"  class="">{{ category.title|title }}</a>
+	          </li>
+			  {% endfor %}
+
+				<!--
+	          <li>
+	            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Accessories</a>
+	            <ul class="collapse list-unstyled" id="pageSubmenu3">
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Nicklace</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Ring</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Bag</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Sacks</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Lipstick</a></li>
+	            </ul>
+	          </li>
+	         -->
+	        </ul>
+
+	      </div>
+    	</nav>
+
+		  <div id="content" class="">
+			 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+			  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+			  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+			  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner">
+
+
+
+                {% for wallpaper in wallpapers %} <!--correct-->
+
+                 {% if wallpaper.id_num == 1 %}
+                       <div class="carousel-item active">
+                        <img src="{{ wallpaper.image_url }}"  class="img-top" alt="...">
+                        <div class="carousel-caption">
+                            <h5>{{wallpaper.title}}</h5>
+                            <p>{{wallpaper.description}}</p>
+                        </div>
+                      </div>
+                 {% else %}
+                 <div class="carousel-item">
+                    <img src="{{ wallpaper.image_url }}"  class="img-top" alt="...">
+                    <div class="carousel-caption">
+                        <h5>{{wallpaper.title}}</h5>
+                        <p>{{wallpaper.description}}</p>
+                    </div>
+			        </div>
+                {% endif %}
+              {% endfor %}
+
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+			  <span class="carousel-control-prev-icon ml-5" aria-hidden="true"></span>
+			  <span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+			  <span class="carousel-control-next-icon mr-5" aria-hidden="true"></span>
+			  <span class="sr-only">Next</span>
+			</a>
+		  </div>
+		</div>
+	  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+<div class="Icons">
+        <div class="container">
+            <ul>
+				{% for category in categories %}
+				 <li>
+                    <a class="btn-mod btn-11" href="#"><img src="{{category.cat_icon}}"/></a>
+                    <a href="#0">{{ category.title|title }}</a>
+                </li>
+			  	{% endfor %}
+                <li>
+                    <a class="btn-mod btn-11" href="#"><img src="https://img.icons8.com/carbon-copy/100/000000/trust.png"/></a>
+                    <a href="#0">Furniture</a>
+                </li>
+                <li>
+                    <a class="btn-mod btn-1" href="#"><img src="https://img.icons8.com/carbon-copy/100/000000/curly-arrow.png"/></a>
+                    <a href="#0" >Baskets</a>
+
+                </li>
+                <li>
+                    <a class="btn-mod btn-10" href="#"><img src="https://img.icons8.com/dotty/80/000000/add-link.png"/></a>
+                    <a href="#0" >Candle Holder</a>
+
+                </li>
+                <li>
+                    <a class="btn-mod btn-1" href="#"><img src="https://img.icons8.com/carbon-copy/100/000000/hand-drawn-star.png"/></a>
+                    <a href="#0">Mirrors</a>
+
+                </li>
+                <li>
+                    <a class="btn-mod btn-11" href="#"><img src="https://img.icons8.com/carbon-copy/100/000000/high-five.png"/></a>
+                    <a href="#0">Holiday</a>
+                </li>
+                <li>
+                    <a class="btn-mod btn-1" href="#"><img src="https://img.icons8.com/carbon-copy/100/000000/hand-planting.png"/></a>
+                    <a href="#0">Glassware
+                        </a>
+
+                </li>
+                <li>
+                    <a class="btn-mod btn-10" href="#"><img src="https://img.icons8.com/carbon-copy/100/000000/filled-circle.png"/></a>
+                    <a href="#0">Cutting Board</a>
+
+                </li>
+                <li>
+                    <a class="btn-mod btn-11" href="#"><img src="https://img.icons8.com/carbon-copy/100/000000/cash-in-hand.png"/></a>
+                    <a href="#0">Desk Lamps</a>
+
+                </li>
+                <li>
+                    <a class="btn-mod btn-10" href="#"><img src="https://img.icons8.com/carbon-copy/100/000000/scary-hand.png"/></a>
+                    <a href="#0">Dining Table</a>
+                </li>
+                <li>
+                    <a class="btn-mod btn-1" href="#"><img src="https://img.icons8.com/carbon-copy/100/000000/penrose-square.png"/></a>
+                    <a href="#0">Dining Chairs</a>
+
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+
+<!--
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Trending <b>Products</b></h2>
+			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">-->
+			<!-- Carousel indicators -->
+			<!--<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active bg-secondary"></li>
+				<li data-target="#myCarousel" data-slide-to="1" class="bg-secondary" ></li>
+				<li data-target="#myCarousel" data-slide-to="2" class="bg-secondary" ></li>
+			</ol>-->
+			<!-- Wrapper for carousel items -->
+			<!--<div class="carousel-inner">
+				<div class="carousel-item active">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="https://cdn.pixabay.com/photo/2018/03/04/12/33/dairy-3197921_1280.jpg" class="img-fluid" alt="">
+								</div>
+								<div class="thumb-content" style="height:10vw">
+									<h4>Apple iPad</h4>
+									<p class="item-price"><strike>$400.00</strike> <span>$369.00</span></p>
+
+								</div>
+								<a href="#" class="btn btn-dark">Add to Cart</a>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRCKgxQnpKHoX1y0R855VRCmYWfJl_Qdv8NPQ&usqp=CAU" class="img-fluid" alt="">
+								</div>
+								<div class="thumb-content" style="height:10vw">
+									<h4>Sony Headphone</h4>
+									<p class="item-price"><strike>$25.00</strike> <span>$23.99</span></p>
+
+								</div>
+								<a href="#" class="btn btn-dark">Add to Cart</a>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="https://cdn.pixabay.com/photo/2019/12/04/04/51/almonds-4671678_1280.jpg" class="img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Macbook Air</h4>
+									<p class="item-price"><strike>$899.00</strike> <span>$649.00</span></p>
+									<a href="#" class="btn btn-dark">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSA-bs4cKcgcvQoeaSWd8O0eVR_03o80aAdqw&usqp=CAU" class="img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Nikon DSLR</h4>
+									<p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p>
+									<a href="#" class="btn btn-dark">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/play-station.jpg" class="img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Sony Play Station</h4>
+									<p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/macbook-pro.jpg" class="img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Macbook Pro</h4>
+									<p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/speaker.jpg" class="img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Bose Speaker</h4>
+									<p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/galaxy.jpg" class="img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Samsung Galaxy S8</h4>
+									<p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/iphone.jpg" class="img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Apple iPhone</h4>
+									<p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/canon.jpg" class="img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Canon DSLR</h4>
+									<p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/pixel.jpg" class="img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Google Pixel</h4>
+									<p class="item-price"><strike>$450.00</strike> <span>$418.00</span></p>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<div class="img-box">
+									<img src="/examples/images/products/watch.jpg" class="img-fluid" alt="">
+								</div>
+								<div class="thumb-content">
+									<h4>Apple Watch</h4>
+									<p class="item-price"><strike>$350.00</strike> <span>$330.00</span></p>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>-->
+			<!-- Carousel controls -->
+		<!--	<a class="carousel-control-prev"
+               style="height: 100px; width: 40px; background: none; margin: auto 0; background: rgba(0, 0, 0, 0.2);"
+               href="#myCarousel" data-slide="prev">
+				<i class="fa fa-angle-left"></i>
+			</a>
+			<a class="carousel-control-next"
+               style="height: 100px; width: 40px; background: none; margin: auto 0; background: rgba(0, 0, 0, 0.2);"
+               href="#myCarousel" data-slide="next">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</div>
+		</div>
+	</div>
+</div>-->
+<style>
+	.wrapper {
+    margin-top: 30px
+}
+
+.card {
+    border: 1px solid #eee;
+    cursor: pointer
+}
+
+.weight {
+    margin-top: -65px;
+    transition: all 0.5s
+}
+
+.weight small {
+    color: #e2dede
+}
+
+.buttons {
+    padding: 10px;
+    background-color: #d6d4d44f;
+    border-radius: 4px;
+    position: relative;
+    margin-top: 7px;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.dot {
+    height: 14px;
+    width: 14px;
+    background-color: green;
+    border-radius: 50%;
+    position: absolute;
+    left: 27%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    color: #fff;
+    opacity: 0
+}
+
+.cart-button {
+    height: 48px
+}
+
+.cart-button:focus {
+    box-shadow: none
+}
+
+.cart {
+    position: relative;
+    height: 48px !important;
+    width: 50px;
+    margin-right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 11px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 1s ease-in-out;
+    overflow: hidden
+}
+
+.cart-button.clicked span.dot {
+    animation: item 0.3s ease-in forwards
+}
+
+@keyframes item {
+    0% {
+        opacity: 1;
+        top: 30%;
+        left: 30%
+    }
+
+    25% {
+        opacity: 1;
+        left: 26%;
+        top: 0%
+    }
+
+    50% {
+        opacity: 1;
+        left: 23%;
+        top: -22%
+    }
+
+    75% {
+        opacity: 1;
+        left: 19%;
+        top: -18%
+    }
+
+    100% {
+        opacity: 1;
+        left: 14%;
+        top: 28%
+    }
+}
+
+.card:hover .buttons {
+    opacity: 1
+}
+
+.card:hover .weight {
+    margin-top: 10px
+}
+
+.card:hover {
+    transform: scale(1.04);
+    z-index: 2;
+    overflow: hidden
+}
+</style>
+<div class="wrapper pb-5 mb-5">
+    <div class="container" >
+		<h2>Trending <b>Products</b></h2>
+        <div class="row g-1">
+            {% for trending_product in trending_products %}
+            <div class="col-md-3">
+                <div class="card p-3">
+                    <div class="text-center"> <img src="{{ trending_product.image_url }}" width="200"> </div>
+                    <div class="product-details"> <span class="font-weight-bold d-block">$ 7.00</span> <span>Red Redish</span>
+                        <div class="buttons d-flex flex-row">
+                           <button class="btn btn-success cart-button btn-block">Add to cart </button>
+                        </div>
+                        <div class="weight"> <small>1 piece 2.5kg</small> </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="col-md-3">
+                <div class="card p-3">
+                    <div class="text-center"> <img src="https://i.imgur.com/ZRUetRF.jpg" width="200"> </div>
+                    <div class="product-details"> <span class="font-weight-bold d-block">$ 7.00</span> <span>Red Redish</span>
+                        <div class="buttons d-flex flex-row">
+                            <button class="btn btn-success cart-button btn-block">Add to cart </button>
+                        </div>
+                        <div class="weight"> <small>1 piece 2.5kg</small> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3">
+                    <div class="text-center"> <img src="https://i.imgur.com/0M7pldG.jpg" width="200"> </div>
+                    <div class="product-details"> <span class="font-weight-bold d-block">$ 7.00</span> <span>Red Redish</span>
+                        <div class="buttons d-flex flex-row">
+                            <button class="btn btn-success cart-button btn-block">Add to cart </button>
+                        </div>
+                        <div class="weight"> <small>1 piece 2.5kg</small> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3">
+                    <div class="text-center"> <img src="https://i.imgur.com/emb60L5.jpg" width="200"> </div>
+                    <div class="product-details"> <span class="font-weight-bold d-block">$ 7.00</span> <span>Red Redish</span>
+                        <div class="buttons d-flex flex-row">
+                            <button class="btn btn-success cart-button btn-block">Add to cart </button>
+                        </div>
+                        <div class="weight"> <small>20 piece 2.5kg</small> </div>
+                    </div>
+                </div>
+            </div>-->
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--Footer-->
+<footer class="container-fluid py-5 bg-light" >
+  <div class="row">
+	<div class="col-md-4 col-xl-5">
+	  <div class="pr-xl-4" id="LogoContainer">
+		  <a class="brand" href="#">
+		  	<img class="brand-logo-light" src="{% static 'WebLogo.svg' %}" alt="" width="50%" style="margin-left:-30px;">
+		  </a>
+		<p class="">We are an award-winning creative agency, dedicated to the best result in web design, promotion, business consulting, and marketing.</p>
+		<!-- Rights-->
+		<p class="rights"><span>©  </span><span class="copyright-year">2018</span><span> </span><span>Waves</span><span>. </span><span>All Rights Reserved.</span></p>
+	  </div>
+	</div>
+
+    <!--<div class="col-6 col-md">
+      <h5>Contact Us</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted"
+			   href="https://www.google.lk/maps/place/Jenefa+Healthy+Mart/@6.9410824,79.8478671,15.21z/data=!4m5!3m4!1s0x3ae259d43b0b99b5:0x3fc2eb3cab102cbd!8m2!3d6.9427162!4d79.8562792">
+			58A Brassfounder Street,<br>Colombo 13,<br>Sri Lanka</a></li>
+        <li><a class="text-muted" href="#"><br>+94 11 2321081</a></li>
+        <li><a class="text-muted" href="mailto:jenefahealthymart@gmail.com">jenefahealthymart@gmail.com</a></li>
+      </ul>
+    </div>-->
+
+   <div class="col-md-4">
+	  <h5>Contacts</h5>
+		  <dl class="contact-list">
+			<dt>Address:</dt>
+			<dd>
+				<a style="color:#111"
+						href="https://www.google.lk/maps/place/Jenefa+Healthy+Mart/@6.9410824,79.8478671,15.21z/data=!4m5!3m4!1s0x3ae259d43b0b99b5:0x3fc2eb3cab102cbd!8m2!3d6.9427162!4d79.8562792"></a>
+
+
+				58A Brassfounder Street,<br>Colombo 13, Sri Lanka</dd>
+		  </dl>
+		  <dl class="contact-list">
+			<dt>email:</dt>
+			<dd><a href="mailto:jenefahealthymart@gmail.com" style="color:#111" >jenefahealthymart@gmail.com</a></dd>
+		  </dl>
+		  <dl class="contact-list">
+			<dt>phones:</dt>
+			<dd><a href="tel:94112321081" style="color:#111">+94 11 2321 081</a> <span>or</span> <a href="tel:94773203636" style="color:#111">+94 77 320 3636</a>
+			</dd>
+		  </dl>
+	</div>
+  	<div class="col-md-4 col-xl-3">
+	  <h5>Links</h5>
+	  <ul class="nav-list">
+		<li><a href="{% url 'product_urls:questions-page' %}">About</a></li>
+		<li><a href="#">Projects</a></li>
+		<li><a href="#">Blog</a></li>
+		<li><a href="#">Contacts</a></li>
+		<li><a href="#">Pricing</a></li>
+	  </ul>
+	</div>
+  </div>
+<hr>
+	<p class="text-center">Designed by <a href="#">Sheena Villawarayen</a></p>
+</footer>
+
+
+{% endblock %}

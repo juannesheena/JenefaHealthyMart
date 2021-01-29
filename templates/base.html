@@ -6,77 +6,224 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!--<meta name="description" content="Do Want to deliver groceries to your doorstep ? Order groceries online in our Jenefa Healthy Mart. Save time (and money) and buy healthy groceries online! ">
+    <meta name="keywords" content="Dairy, Meat, Almonds, Eggs, Cheap, Cresant,
+                Keells, Grocery, Online, Chicken, Fresh, Healthy, Jenefa, Mart, Brassfounder, Brass, founder, Colombo, Cash, Delivery">
+    <meta name="author" content="Jenefa Healthy Mart">-->
+
+
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/fontawesome/css/all.min.css' %}">
+
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
-    <title>Bake Walkers </title>
-    <link rel="icon" type="image/ico" href="{% static 'cookie.svg' %}" />
+    <title>Jenefa Healthy Mart - Online Grocery </title>
+    <link rel="icon" type="image/ico" href="{% static 'TitleIcon.png' %}"/>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+
+	<!--<link rel="stylesheet" href="{% static 'css/SidebarStyle.css' %}">-->
+
+
 
     {% block extra_head %}
     {% endblock %}
 
+<style>
+    #btnCategories{
+    visibility:hidden;
+    }
+
+    body {
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 14px;
+    }
+
+
+    #Logo{
+        height: Auto;
+        width: 17%;
+        //transition-property: width;
+        transition-duration: 0.2s;
+        //transition-timing-function: linear;
+
+    }
+
+
+
+    .form-control{
+        font-size: 13px;
+    }
+    a {
+        text-decoration: none;
+        background-color: transparent;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+    @media only screen and (max-width: 600px) {
+    #name{
+        display:none;
+    }
+    #jenefa_logo{
+        width:50%;
+    }
+    #search-bar{
+        display:none;
+    }
+    }
+
+    @media screen and (min-width: 768px) {
+    #search-bar2{
+        display:none;
+    }
+    }
+}
+
+
+</style>
+
 
 </head>
 <body>
+<script>
+window.onscroll = function() {
+  growShrinkLogo()
+};
+
+function growShrinkLogo() {
+  var Logo = document.getElementById("Logo");
+  var nav = document.getElementById("nav");
+  if (document.body.scrollTop > 5 || document.documentElement.scrollTop > 5) {
+
+    //Logo.style.width = '15%';
+    nav.style.boxShadow ='0 2px 2px 0 #EAEDED ';
+
+  } else {
+
+    //Logo.style.width = '17%';
+    nav.style.boxShadow ='0 0 0 0 #FFFFFF';
+  }
+}
+</script>
+
+ <script>
+function openNav() {
+  document.getElementById("sidebar").style.width = "250px";
+  document.getElementById("content").style.marginLeft = "250px";
+  document.getElementById("btnCategories").innerHTML = "<a href='javascript:closeNav()' >×</a>";
+}
+
+function closeNav() {
+  document.getElementById("sidebar").style.width = "0";
+  document.getElementById("content").style.marginLeft = "0";
+  document.getElementById("btnCategories").innerHTML = "<a href='javascript:openNav()' >☰</a>";
+}
+
+function toggleNav(lnk_obj) {
+    var el = document.getElementById("sidebar");
+    el.style.width = window.getComputedStyle(el).width === "0px" ? "250px" : "0px";
+    lnk_obj.innerHTML = lnk_obj.innerHTML === '×' ? '☰' : '×' ;
+  }
+  </script>
+
 <div class="pos-f-t">
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-dark p-4">
-
-            <div class="col-sm-8 col-md-7 py-4">
-                <h4 class="text-white">About</h4>
-                <p class="text-muted" style="font-size:18px">Cakes, Shakes & Cake Shake Heaven!</p>
-            </div>
 
 
-        </div>
-    </div>
-    <nav class="navbar navbar-dark bg-dark">
-        <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="nav" style="background:white;" > <!--style="background-color:rgb(183,183,74);"-->
+        <a href="javascript:void(0)" class="btn btn-outline-dark" id="btnCategories" onclick="toggleNav(this)">☰</a>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link " href="{% url 'product_urls:home-page' %}"> Home <span
-                                class="sr-only">(current)</span></a>
-                    </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            Profile
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item " href="{% url 'product_urls:login-page' %}">Log in</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'product_urls:register-page' %}">Sign Up</a>
+                        <img src="{% static 'WebLogo.svg' %}" class="img-fluid" width="15%" id="jenefa_logo" >
+              <!--  <div id="nav-item">
+                   <div class="navbar-brand" style="cursor:pointer">
+                    </div>--><!--☰-->
+            <!--    </div>-->
+
+
+
+
+
+                        <div class="ml-auto row">
+
+
+
+                      <form class="form-inline" method='GET' action="{% url 'product_urls:search-page' %}" id="search-bar">
+
+                        <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
+                        <button class="btn my-2 my-sm-0" type="submit">  <span class="fa fa-search"></span></button>
+                      </form>
+
+                              <a class="btn" href="{% url 'product_urls:cart-page' %}">
+                                    <svg height="20pt" viewBox="0 -31 512.00033 512" width="20pt" xmlns="http://www.w3.org/2000/svg" id="icon_cart">
+                                        <path d="m166 300.003906h271.003906c6.710938 0 12.597656-4.4375 14.414063-10.882812l60.003906-210.003906c1.289063-4.527344.40625-9.390626-2.433594-13.152344-2.84375-3.75-7.265625-5.964844-11.984375-5.964844h-365.632812l-10.722656-48.25c-1.523438-6.871094-7.617188-11.75-14.648438-11.75h-91c-8.289062 0-15 6.710938-15 15 0 8.292969 6.710938 15 15 15h78.960938l54.167968 243.75c-15.9375 6.929688-27.128906 22.792969-27.128906 41.253906 0 24.8125 20.1875 45 45 45h271.003906c8.292969 0 15-6.707031 15-15 0-8.289062-6.707031-15-15-15h-271.003906c-8.261719 0-15-6.722656-15-15s6.738281-15 15-15zm0 0"/><path d="m151 405.003906c0 24.816406 20.1875 45 45.003906 45 24.8125 0 45-20.183594 45-45 0-24.8125-20.1875-45-45-45-24.816406 0-45.003906 20.1875-45.003906 45zm0 0"/><path d="m362.003906 405.003906c0 24.816406 20.1875 45 45 45 24.816406 0 45-20.183594 45-45 0-24.8125-20.183594-45-45-45-24.8125 0-45 20.1875-45 45zm0 0"/>
+                                    </svg>
+                                    <span class="badge" style="background-color:#b7b74a">{{ count }}</span>
+
+                              </a>
+
+
+
+                                 <div class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" style="color:black;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          <img src="{% static 'user.svg' %}" width="20pt"  id="icon_user">
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                         <a class="dropdown-item" href="{% url 'product_urls:login-page' %}">Login</a>
+                                            <a class="dropdown-item" href="{% url 'product_urls:register-page' %}">SignUp</a>
+                                         <!-- <div class="dropdown-divider"></div>
+                                          <a class="dropdown-item" href="#">Something else here</a>-->
+                                        </div>
+                                </div>
+                                <a class="p-2 text-dark" style="margin-right:5px" href="#" id="name">{{request.user}}</a>
+
+
                         </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'product_urls:cart-page' %}">Cart</a>
-                    </li>
 
 
-                </ul>
 
-            </div>
-        </nav>
-        <a href="#" class="navbar-brand d-flex align-items-center">
-            <span><i class="fas fa-cookie-bite"></i>  Bake Walkers</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
-                aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+
+
     </nav>
+
+
+<div class="col-md-12 ml-2">
+
+        <form class="form-inline pt-5 mt-5" method='GET' action="{% url 'product_urls:search-page' %}" id="search-bar2">
+
+        <input class="form-control col-10" type="search" name="q" placeholder="Search" aria-label="Search">
+        <button class="btn my-sm-0" type="submit">  <span class="fa fa-search"></span></button>
+        </form>
 </div>
 
-<div class="container" style=" margin-top:3%">
+  <!--    <div class="row">
+        <div class="col-12 col-md">
+            <img src="{% static 'WebLogo.svg' %}" height="Auto" width="50%">
+        </div>
+
+        <div class="col">
+        </div>
+
+        <div class="col">
+           <div style="text-align:center">
+                <a href="tel:0112321081" class="h6 nav-link" style="color:black" ><br><i class="fas fa-phone-alt"></i> +94 11 2321081</a>
+           </div>
+        </div>
+      </div>
+-->
+
+
+
+</div>
+
+<div> <!-- style=" margin-top:3%"-->
     {% block content %}
     {% endblock %}
 </div>
@@ -92,5 +239,23 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+
+<!--Start of Tawk.to Script-->
+<!---<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5f7eb9d44704467e89f5a3bb/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>-->
+<!--End of Tawk.to Script-->
+<!--End of Tawk.to Script-->
+
+<script src="//code.tidio.co/jj2akctfof0u9z5qixtk9fzv8b6k6njg.js"></script>
 </body>
 </html>
+

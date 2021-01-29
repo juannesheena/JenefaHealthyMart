@@ -2,13 +2,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
+
+
 from products.forms import CreateUserForm
 from django.contrib import messages
-from products.models import Product, OrderItem, Order, BillingAddress, Payment, Offer
+from products.models import Product, OrderItem, Order, BillingAddress, Payment, Offer, Category, TrendingProduct, Wallpaper
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from .forms import CheckoutForm, CouponForm
+from .filters import ProductFilter
+from itertools import chain
+from rest_framework import filters, generics
 from django.conf import settings
 import stripe
 
@@ -16,8 +21,74 @@ stripe.api_key = 'sk_test_7ldOddTn4RhtJOa5FAiUX9tF00juWf04DG'
 
 
 def index(request):
-    products = Product.objects.all()  # can filter the products
-    return render(request, 'index.html', {'products': products})
+    try:
+
+        if request.user.is_authenticated:
+            order = Order.objects.get(user=request.user, ordered=False)
+            count = order.items.count
+        else:
+            count = 0
+
+    except ObjectDoesNotExist:
+        count = 0
+
+    category = Category.objects.all()
+    items = Product.objects.all()
+    trending_product = TrendingProduct.objects.all()
+    wallpaper = Wallpaper.objects.all()
+    context = {'categories': category, 'items': items, 'count': count,
+               'wallpapers': wallpaper, 'trending_products': trending_product}
+    return render(request, 'home.html', context)
+
+
+def faq_user(request):
+    return render(request, 'FAQ.html')
+
+
+class SearchView(ListView):
+    # template_name = 'search/products_view.html'
+    template_name = 'view.html'
+    # paginate_by = 20
+    count = 0
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['count'] = self.count or 0
+        context['query'] = self.request.GET.get('q')
+        return context
+        # render(self.request, 'view.html', context)
+
+    def get_queryset(self):
+        request = self.request
+        query = request.GET.get('q', None)
+
+        if query is not None:
+            product_results = Product.objects.search(query)
+            # lesson_results = Lesson.objects.search(query)
+            # profile_results = Profile.objects.search(query)
+
+            # combine querysets
+            queryset_chain = chain(
+                product_results,
+                # lesson_results,
+                # profile_results
+            )
+            qs = sorted(queryset_chain,
+                        key=lambda instance: instance.pk,
+                        reverse=True)
+            self.count = len(qs)  # since qs is actually a list
+            return qs
+            # return render(request, 'view.html', qs)
+        return Product.objects.none()
+
+
+def category_view(request, cats):
+    category_products = Product.objects.filter(category__title=cats)
+    # products = Product.objects.all()
+    myFilter = ProductFilter(request.GET, queryset=category_products)
+    category_products = myFilter.qs
+    context = {'cats': cats.title, 'category_products': category_products, 'myFilter': myFilter}
+    return render(request, 'categories.html', context)
 
 
 def register(request):
@@ -205,7 +276,6 @@ class CheckoutView(View):
             return redirect("product_urls:cart-page")
         messages.warning(self.request, "Please fill up the entire form")
         return redirect("product_urls:checkout-page")
-
 
 
 class ItemDetailView(DetailView):

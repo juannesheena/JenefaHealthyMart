@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-
+<div class="container mt-5 pt-5">
 <div class="">
     {% if messages %}
     {% for message in messages %}
@@ -30,7 +30,7 @@
         </form>-->
 
 
-        <form method="post" class="needs-validation" novalidate="">
+        <form method="post" class="needs-validation subscribe-form" novalidate="">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="street_address">Street Address</label>
@@ -136,6 +136,7 @@
         </form>
 
     </div>
+</div>
 </div>
 
 

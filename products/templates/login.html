@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
 
 <style>
+#loginBox{
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    border-radius: 2%;
 
+}
 
 </style>
 <div class="container">
@@ -29,25 +36,28 @@
         {% else %}
     </div>
 </div>
-<div class="bg-light col-md-4" style="margin: 0 auto; float: none; margin-bottom: 10px;">
-    <span style="font-size:100px; color:#626567;"><center><i class="fas fa-cookie-bite"></i></center></span>
+<div class="bg-light col-md-4 "  id="loginBox" >
+    <div class="pt-3">
+        <center><img src="{% static 'WebLogo.svg' %}" ></center>
+    </div>
 <div class="p-4">
-<form class="form-signin" method="post"><!--action="{% url 'product_urls:home-page' %}"-->
+<form class="form-signin subscribe-form" method="post"><!--action="{% url 'product_urls:home-page' %}"-->
     {% csrf_token %}
-   <div class="col">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control p-4" name="username">
+
+    <div class="form-group" >
+        <!--<label for="username">Username</label>-->
+        <input type="text" class="form-control p-4" name="username" id="username" placeholder="Username">
     </div>
     <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control p-4" name="password">
+        <!--<label for="password">Password</label>-->
+        <input type="password" class="form-control p-4" name="password" id="password" placeholder="Password" >
     </div>
 
-    <button type="submit" class="btn btn-lg btn-primary btn-block">Sign In</button>
-   </div>
+    <button type="submit" class="btn btn-outline-primary btn-block">Sign In</button>
+       <p class="pt-5"><center>looking to <a href="{% url 'product_urls:register-page' %}">create an account ?</a></center></p>
+
     {% for message in messages %}
-    <p id="message">{{message}}</p>
+    <center><p id="message" style="color:red">{{message}}</p></center>
     {% endfor %}
 </form>
 </div>

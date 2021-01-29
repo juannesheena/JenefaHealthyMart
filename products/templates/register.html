@@ -17,12 +17,16 @@
         {% else %}
     </div>
 </div>
-
-<form class="signup-form" method="post">
+<div class="container">
+<div class="row justify-content-center">
+<div class="card bg-light m-5 p-5">
+<h4 class="card-title text-center">Create Account</h4>
+<p class="text-center">Get started with your free account</p>
+<form  class="signup-form subscribe-form justify-content-md-center mt-3" method="post">
     {% csrf_token %}
 
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group">
             {% for field in form %}
             <p>
                 {{ field.label_tag }}<br>
@@ -40,9 +44,12 @@
 
 
     <!--{{form.as_p}}-->
-    <button type="submit" name="CreateUserForm" class="btn btn-primary">Sign in</button>
+    <button type="submit" name="CreateUserForm" class="btn btn-outline-primary btn-block">Sign Up</button>
 </form>
-
+    <p class="text-center pt-2">Have an account? <a href="{% url 'product_urls:login-page' %}">Log In</a> </p>
+</div>
+</div>
+</div>
 <script>
     var form_fields=document.getElementsByTagName('input')
     for(var field in form_fields){

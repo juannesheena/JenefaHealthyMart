@@ -2,6 +2,27 @@ from django.db import models
 from django.shortcuts import reverse
 from django.conf import settings
 from django_countries.fields import CountryField
+from django.db.models import Q
+
+
+class ProductManager(models.Manager):
+    def search(self, query=None):
+        qs = self.get_queryset()
+        if query is not None:
+            or_lookup = (Q(name__icontains=query) |
+                         Q(description__icontains=query) |
+                         Q(slug__icontains=query)
+                         )
+            qs = qs.filter(or_lookup).distinct()  # distinct() is often necessary with Q lookups
+        return qs
+
+
+class Category(models.Model):
+    title = models.CharField(max_length=255)
+    cat_icon = models.CharField(max_length=2083)
+
+    def __str__(self):
+        return self.title
 
 
 class Product(models.Model):
@@ -11,12 +32,16 @@ class Product(models.Model):
     slug = models.SlugField()
     description = models.TextField()
     image_url = models.CharField(max_length=2083)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    objects = ProductManager()
+
+    # category = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("product_urls:home-page", kwargs={
+        return reverse("product_urls:list-page", kwargs={
             'slug': self.slug
         })
 
@@ -31,9 +56,25 @@ class Product(models.Model):
         })
 
 
+class TrendingProduct(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image_url = models.CharField(max_length=2083)
+
+
+class Wallpaper(models.Model):
+    id_num = models.IntegerField()
+    image_url = models.CharField(max_length=2083)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.id_num
+
+
 class Offer(models.Model):
     code = models.CharField(max_length=15)
     description = models.CharField(max_length=255)
+    Image = models.CharField(max_length=2083)
     discount = models.FloatField()
 
     def __str__(self):
@@ -90,6 +131,7 @@ class BillingAddress(models.Model):
     apartment_address = models.CharField(max_length=100)
     country = CountryField(multiple=False)
     zip = models.CharField(max_length=100)
+
     # address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
     # default = models.BooleanField(default=False)
 
@@ -106,4 +148,3 @@ class Payment(models.Model):
 
     def __str__(self):
         return self.user.username
-

@@ -26,7 +26,7 @@
         </li>
     </ul>
     {% if DISPLAY_COUPON_FORM %}
-    <form class="card p-2" action="{% url 'product_urls:add-coupon' %}" method="post">
+    <form class="card p-2 subscribe-form" action="{% url 'product_urls:add-coupon' %}" method="post">
         {% csrf_token %}
         <div class="input-group">
             {{ couponform.code }}

@@ -28,8 +28,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 STATICFILES_DIRS = [
-    "PycharmProjects/PyStore/products/static",
+    "static",
 ]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,9 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products.apps.ProductsConfig',
     'django_countries',
+    'django_filters',
     'crispy_forms',
-    'stripe'
+    'bootstrapform',
+    'stripe',
+    'rest_framework',
+
 ]
+
+STATIC_URL = '/static/'
+STATIC_ROOT = "/static/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

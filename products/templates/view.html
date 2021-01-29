@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load class_name %}
+{% block content %}
+<style>
+.card-img-top {
+    width: 100%;
+    height: 12vw;
+    object-fit: scale-down;
+
+}
+
+@media only screen and (max-width: 600px) {
+    .card-img-top {
+    width: 100%;
+    height: 25vw;
+    object-fit: scale-down;
+
+    }
+}
+
+
+
+.card{
+    min-height: 20vw;
+
+}
+
+.card-b1{
+    min-height: 7vw;
+
+}
+
+#addToCart{
+    border: 1px solid #5c701f;
+    color:#5c701f;
+    font-weight: 600;
+
+}
+
+
+
+#addToCart:hover {
+    border: 1px solid #b7b74a;
+    background-color:#b7b74a;
+    color: #FFFFFF;
+    font-weight: 400;
+}
+
+
+
+
+</style>
+<div class="container">
+<div class='row title-row my-5 pt-5 mt-5'>
+    <div class='col-12 py-0'>
+        <h6 class='my-0 py-0'>{{ count }} results for <b>{{ query }}</b></h6>
+    </div>
+</div>
+
+<div class="row ">
+{% for object in object_list %}
+
+
+
+             <div class="py-3 card" style="width: 18rem;"><!--col-lg-3-->
+                   <img src="{{ object.image_url }}" class="card-img-top" alt="Image Not Found">
+
+                    <div class="card-body">
+                        <div class="card-b1">
+                            <p style="font-size:14px; font-weight:600;" class="card-title">{{ object.name }}</p>
+                            <p class="card-text">LKR {{object.price}}</p>
+                        </div>
+                         <a href="{% url 'product_urls:product-page' object.slug %}"
+                            class="btn btn-outline-primary btn-block"
+                            id="addToCart">Add to Cart</a> <!--{{ product.slug }}-->
+
+                    </div>
+
+            </div>
+
+
+{% endfor %}
+</div>
+</div>
+{% endblock %}
