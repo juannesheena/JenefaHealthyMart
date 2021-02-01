@@ -13,6 +13,8 @@
 
 
     {% load static %}
+    {% load category_list %}
+
     <link rel="stylesheet" href="{% static 'css/fontawesome/css/all.min.css' %}">
 
 
@@ -37,9 +39,7 @@
     {% endblock %}
 
 <style>
-    #btnCategories{
-    visibility:hidden;
-    }
+
 
     body {
     font-family: "Poppins", Arial, sans-serif;
@@ -85,6 +85,54 @@
         display:none;
     }
     }
+
+
+
+    #sidebar ul li a {
+    padding: 10px 0;
+    display: block;
+    color: black;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    text-decoration:none;
+}
+#sidebar ul li {
+    font-size: 14px;
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    font-weight: normal;
+    background: #fff;
+}
+
+#sidebar {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Stay on top */
+  top: 0;
+  left: 0;
+
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  box-shadow: 0 0 10px 0px #111;
+}
+
+#sidebar .closebtn {
+  position: absolute;
+  top: 50px;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
 }
 
 
@@ -133,6 +181,8 @@ function toggleNav(lnk_obj) {
     lnk_obj.innerHTML = lnk_obj.innerHTML === '×' ? '☰' : '×' ;
   }
   </script>
+
+
 
 <div class="pos-f-t">
 
@@ -222,6 +272,35 @@ function toggleNav(lnk_obj) {
 
 
 </div>
+{% category_list request %}
+<nav id="sidebar" class="bg-light">
+
+				<div class="m-5 pt-5">
+					<h5>Categories</h5>
+
+	        <ul class="list-unstyled components mb-5">
+			  {% for category in categories %}
+	          <li>
+	            <a href="{% url 'product_urls:category-page' category.title %}"  class="">{{ category.title|title }}</a>
+	          </li>
+			  {% endfor %}
+
+				<!--
+	          <li>
+	            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Accessories</a>
+	            <ul class="collapse list-unstyled" id="pageSubmenu3">
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Nicklace</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Ring</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Bag</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Sacks</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Lipstick</a></li>
+	            </ul>
+	          </li>
+	         -->
+	        </ul>
+
+	      </div>
+    	</nav>
 
 <div> <!-- style=" margin-top:3%"-->
     {% block content %}

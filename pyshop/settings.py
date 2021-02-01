@@ -22,11 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'g3f3p(xuh!c96psid)@%w@%_pke&@nc%c@)9)lxunx+afqi7n0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['jenefahealthymart.herokuapp.com', '127.0.0.1:8000']
 
 # Application definition
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # before static url
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     "static",
 ]
@@ -43,17 +45,16 @@ INSTALLED_APPS = [
     'django_countries',
     'django_filters',
     'crispy_forms',
-    'bootstrapform',
     'stripe',
     'rest_framework',
 
 ]
 
-STATIC_URL = '/static/'
-STATIC_ROOT = "/static/"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

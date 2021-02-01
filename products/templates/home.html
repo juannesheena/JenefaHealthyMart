@@ -7,9 +7,6 @@
 
 
 <style>
-#btnCategories{
-visibility:visible;
-}
 
 
 .img-top {
@@ -142,51 +139,7 @@ h2::after {
     border-radius: 100%;
 }
 
-#sidebar ul li a {
-    padding: 10px 0;
-    display: block;
-    color: black;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    text-decoration:none;
-}
-#sidebar ul li {
-    font-size: 14px;
-}
-
-.list-unstyled {
-    padding-left: 0;
-    list-style: none;
-}
-
-body {
-    font-family: "Poppins", Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.8;
-    font-weight: normal;
-    background: #fff;
-}
-
-#sidebar {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1000; /* Stay on top */
-  top: 0;
-  left: 0;
-
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
-  box-shadow: 0 0 10px 0px #111;
-}
-
-#sidebar .closebtn {
-  position: absolute;
-  top: 50px;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
+/*---------------------*/
 
 .context-dark, .bg-gray-dark, .bg-primary {
     color: rgba(255, 255, 255, 0.8);
@@ -524,7 +477,8 @@ ul, ol {
 
 .btn-11 {
     position: relative;
-    color: #576db7;
+    color: #b7b74a;
+    # color: #576db7;
 }
 
 .btn-11:before,
@@ -534,7 +488,8 @@ ul, ol {
     content: '';
     width: 20px;
     height: 20px;
-    background-color: #3953aa;
+    background-color: #C0C061;
+    # background-color: #3953aa;
     border-radius: 50%;
 }
 
@@ -689,37 +644,6 @@ function removeLoader(){
  <div id="content-box">
       <!-- Page Content  -->
 
-
-
-      <nav id="sidebar" class="bg-light">
-
-				<div class="m-5 pt-5">
-					<h5>Categories</h5>
-
-	        <ul class="list-unstyled components mb-5">
-			  {% for category in categories %}
-	          <li>
-	            <a href="{% url 'product_urls:category-page' category.title %}"  class="">{{ category.title|title }}</a>
-	          </li>
-			  {% endfor %}
-
-				<!--
-	          <li>
-	            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Accessories</a>
-	            <ul class="collapse list-unstyled" id="pageSubmenu3">
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Nicklace</a></li>
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Ring</a></li>
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Bag</a></li>
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Sacks</a></li>
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Lipstick</a></li>
-	            </ul>
-	          </li>
-	         -->
-	        </ul>
-
-	      </div>
-    	</nav>
-
 		  <div id="content" class="">
 			 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -779,10 +703,11 @@ function removeLoader(){
             <ul>
 				{% for category in categories %}
 				 <li>
-                    <a class="btn-mod btn-11" href="#"><img src="{{category.cat_icon}}"/></a>
-                    <a href="#0">{{ category.title|title }}</a>
+                    <a class="btn-mod btn-11" href="{% url 'product_urls:category-page' category.title %}"><img src="{{category.cat_icon}}"/></a>
+                    <a href="{% url 'product_urls:category-page' category.title %}">{{ category.title|title }}</a>
                 </li>
 			  	{% endfor %}
+                <!--
                 <li>
                     <a class="btn-mod btn-11" href="#"><img src="https://img.icons8.com/carbon-copy/100/000000/trust.png"/></a>
                     <a href="#0">Furniture</a>
@@ -830,7 +755,7 @@ function removeLoader(){
                     <a class="btn-mod btn-1" href="#"><img src="https://img.icons8.com/carbon-copy/100/000000/penrose-square.png"/></a>
                     <a href="#0">Dining Chairs</a>
 
-                </li>
+                </li>-->
 
             </ul>
 
@@ -1151,11 +1076,12 @@ function removeLoader(){
             <div class="col-md-3">
                 <div class="card p-3">
                     <div class="text-center"> <img src="{{ trending_product.image_url }}" width="200"> </div>
-                    <div class="product-details"> <span class="font-weight-bold d-block">$ 7.00</span> <span>Red Redish</span>
+
+                    <div class="product-details"> <span class="font-weight-bold d-block">{{ trending_product.get_price }}</span> <span>{{ trending_product.product }}</span>
                         <div class="buttons d-flex flex-row">
                            <button class="btn btn-success cart-button btn-block">Add to cart </button>
                         </div>
-                        <div class="weight"> <small>1 piece 2.5kg</small> </div>
+                        <div class="weight"> <small>only {{ trending_product.get_stock }} available! </small> </div>
                     </div>
                 </div>
             </div>
@@ -1260,7 +1186,7 @@ function removeLoader(){
 	</div>
   </div>
 <hr>
-	<p class="text-center">Designed by <a href="#">Sheena Villawarayen</a></p>
+	<p class="text-center">Designed by <a href="http://lk.linkedin.com/in/sheenavillawarayen">Sheena Villawarayen</a></p>
 </footer>
 
 

@@ -33,10 +33,10 @@ def index(request):
         count = 0
 
     category = Category.objects.all()
-    items = Product.objects.all()
+    item = Product.objects.all()
     trending_product = TrendingProduct.objects.all()
     wallpaper = Wallpaper.objects.all()
-    context = {'categories': category, 'items': items, 'count': count,
+    context = {'categories': category, 'items': item, 'count': count,
                'wallpapers': wallpaper, 'trending_products': trending_product}
     return render(request, 'home.html', context)
 
