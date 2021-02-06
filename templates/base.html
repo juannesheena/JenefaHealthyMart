@@ -13,7 +13,7 @@
 
 
     {% load static %}
-    {% load category_list %}
+    {% comment %}{% load category_list %} {% endcomment %}
 
     <link rel="stylesheet" href="{% static 'css/fontawesome/css/all.min.css' %}">
 
@@ -133,7 +133,7 @@ body {
   font-size: 36px;
   margin-left: 50px;
 }
-}
+
 
 
 </style>
@@ -197,10 +197,6 @@ function toggleNav(lnk_obj) {
                     </div>--><!--☰-->
             <!--    </div>-->
 
-
-
-
-
                         <div class="ml-auto row">
 
 
@@ -225,12 +221,19 @@ function toggleNav(lnk_obj) {
                                         <a class="nav-link dropdown-toggle" style="color:black;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                           <img src="{% static 'user.svg' %}" width="20pt"  id="icon_user">
                                         </a>
+                                      {% if request.user.is_authenticated %}
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                         <a class="dropdown-item" href="{% url 'product_urls:login-page' %}">Login</a>
+                                            <a class="dropdown-item" href="{% url 'product_urls:logout-page' %}">Sign out</a>
+                                            <a class="dropdown-item" href="{% url 'product_urls:profile-page' %}">My Profile</a>
+                                        </div>
+                                      {% else %}
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="{% url 'product_urls:login-page' %}">Login</a>
                                             <a class="dropdown-item" href="{% url 'product_urls:register-page' %}">SignUp</a>
                                          <!-- <div class="dropdown-divider"></div>
                                           <a class="dropdown-item" href="#">Something else here</a>-->
                                         </div>
+                                      {% endif %}
                                 </div>
                                 <a class="p-2 text-dark" style="margin-right:5px" href="#" id="name">{{request.user}}</a>
 
@@ -272,18 +275,19 @@ function toggleNav(lnk_obj) {
 
 
 </div>
-{% category_list request %}
+
 <nav id="sidebar" class="bg-light">
 
 				<div class="m-5 pt-5">
 					<h5>Categories</h5>
 
 	        <ul class="list-unstyled components mb-5">
-			  {% for category in categories %}
+
+			  {% for Category in categories %}
 	          <li>
-	            <a href="{% url 'product_urls:category-page' category.title %}"  class="">{{ category.title|title }}</a>
+	            <a href="{% url 'product_urls:category-page' Category.title %}"  class="">{{ Category.title }}</a>
 	          </li>
-			  {% endfor %}
+              {% endfor %}
 
 				<!--
 	          <li>

@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<style xmlns="http://www.w3.org/1999/html">
+
+@media only screen and (max-width: 600px) {
+#profile-name{
+         padding-top: 5vw;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    #profile-name{
+        padding-top: 10vw;
+    }
+}
+
+</style>
+
+
+<script>
+    function editable(){
+
+    }
+</script>
+<div class="container">
+      <div class="row">
+              <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+              </div>
+                  <h5 id="profile-name">{{ user.first_name }} {{ user.last_name }}</h5>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+
+                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
+                  <dl>
+                    <dt>DEPARTMENT:</dt>
+                    <dd>Administrator</dd>
+                    <dt>HIRE DATE</dt>
+                    <dd>11/12/2013</dd>
+                    <dt>DATE OF BIRTH</dt>
+                       <dd>11/12/2013</dd>
+                    <dt>GENDER</dt>
+                    <dd>Male</dd>
+                  </dl>
+                </div>-->
+                <div class=" col-md-9 col-lg-9 ">
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>First name:</td>
+                        <td>{{ user.first_name }}</td>
+                      </tr>
+                      <tr>
+                        <td>Last name:</td>
+                        <td>{{ user.last_name }}</td>
+                      </tr>
+                      <tr>
+                        <td>Phone Number:</td>
+                        <td>01/24/1988</td>
+                      </tr>
+                      <tr>
+                        <td>Billing Address</td>
+                        <td>Kathmandu,Nepal</td>
+                      </tr>
+                      <tr>
+                        <td>Email</td>
+                        <td>{{ user.email }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <button onClick="editable()" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">Edit Profile</button>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form>
+
+
+                                <!--
+
+                              <div class="form-group">
+                                <label for="message-text" class="col-form-label">Message:</label>
+                                <textarea class="form-control" id="message-text"></textarea>
+                              </div>-->
+
+                              <table class="table table-user-information">
+                                <tbody>
+                                  <tr class="form-group">
+                                    <td><label for="first-name" class="col-form-label">First name:</label></td>
+                                    <td><input type="text" class="form-control" id="first-name" value="{{ user.first_name }}"></td>
+                                  </tr>
+                                  <tr>
+                                    <td><label for="last-name" class="col-form-label">Last name:</label></td>
+                                    <td><input type="text" class="form-control" id="last-name" value="{{ user.last_name }}"></td>
+                                  </tr>
+                                  <tr>
+                                    <td><label for="phone-no" class="col-form-label">Phone Number:</label></td>
+                                    <td><input type="text" class="form-control" id="phone-no" value="0760313434"></td>
+                                  </tr>
+                                  <tr>
+                                    <td><label for="address" class="col-form-label">Billing Address:</label></td>
+                                    <td><input type="text" class="form-control" id="address" value="Kathmandu,Nepal"></td>
+                                  </tr>
+                                  <tr>
+                                    <td><label for="email" class="col-form-label">Email:</label></td>
+                                    <td><input type="text" class="form-control" id="email" value="{{ user.email }}"></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+      </div>
+    </div>
+
+{% endblock %}

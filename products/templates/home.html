@@ -139,7 +139,7 @@ h2::after {
     border-radius: 100%;
 }
 
-/*---------------------*/
+/*-----------category icons----------*/
 
 .context-dark, .bg-gray-dark, .bg-primary {
     color: rgba(255, 255, 255, 0.8);
@@ -644,6 +644,17 @@ function removeLoader(){
  <div id="content-box">
       <!-- Page Content  -->
 
+	 {% if messages %}
+      {% for message in messages %}
+			<div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-5" role="alert">
+				{{ message }}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+     {% endfor %}
+	{% endif %}
+
 		  <div id="content" class="">
 			 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -1136,9 +1147,10 @@ function removeLoader(){
 		  <a class="brand" href="#">
 		  	<img class="brand-logo-light" src="{% static 'WebLogo.svg' %}" alt="" width="50%" style="margin-left:-30px;">
 		  </a>
-		<p class="">We are an award-winning creative agency, dedicated to the best result in web design, promotion, business consulting, and marketing.</p>
+		<p class="">We are an Online Grocery / Convenience Store in Colombo, dedicated to providing high quality groceries including
+			Dairy, Confectionery, Beverages, Processed Meats, Spices and Seasonings, Household Essentials, Cleaning agents and More </p>
 		<!-- Rights-->
-		<p class="rights"><span>©  </span><span class="copyright-year">2018</span><span> </span><span>Waves</span><span>. </span><span>All Rights Reserved.</span></p>
+		<p class="rights"><span>©  </span><span class="copyright-year">2021</span><span> </span><span>Jenefa Lanka (Pvt) Ltd</span><span>. </span><span>All Rights Reserved.</span></p>
 	  </div>
 	</div>
 
@@ -1177,9 +1189,9 @@ function removeLoader(){
   	<div class="col-md-4 col-xl-3">
 	  <h5>Links</h5>
 	  <ul class="nav-list">
-		<li><a href="{% url 'product_urls:questions-page' %}">About</a></li>
-		<li><a href="#">Projects</a></li>
-		<li><a href="#">Blog</a></li>
+		<li><a href="{% url 'product_urls:about-page' %}">About</a></li>
+		<li><a href="{% url 'product_urls:questions-page' %}">FAQ</a></li>
+		<li><a href="{% url 'product_urls:privacy-page' %}">Privacy</a></li>
 		<li><a href="#">Contacts</a></li>
 		<li><a href="#">Pricing</a></li>
 	  </ul>

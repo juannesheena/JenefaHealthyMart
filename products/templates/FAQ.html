@@ -3260,6 +3260,8 @@
     <div id="faq" class="faq-section">
         <div class="faq-container"><h2 data-w-id="9fc53391-ac9c-bde0-bcb5-b5211a319a5b" style="opacity:0"
                                        class="hiw-title faq">Frequently Asked Questions</h2>
+
+            {%  for question in questions %}
             <div class="faq-wrap">
                 <div id="faq-1" data-w-id="e04db666-0926-dee6-a78e-847f735ea761" style="opacity:0"
                      class="faq-question-wrap"><a href="#" class="faq-question-bar w-inline-block">
@@ -3268,22 +3270,19 @@
                          data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg"
                          data-default-duration="0.5" data-duration="0" data-ix2-initial-state="0"
                          class="lottie-animation-3"></div>
-                    <div class="question-title">What is a carbon offset?</div>
+                    <div class="question-title">{{ question.question }}</div>
                 </a>
-                    <div class="faq-content"><p class="paragraph">Unless you are walking or biking, your commute
-                        probably produces greenhouse gas emissions. Luckily, trees are natural carbon sinks - in other
-                        words, they remove carbon dioxide (CO2) from the atmosphere and use it to grow. A carbon offset
-                        lets you help plant exactly enough trees to absorb all that CO2 you are putting into the
-                        atmosphere.</p></div>
+                    <div class="faq-content"><p class="paragraph">{{question.answer}}</p></div>
                 </div>
-                <div id="faq-2" data-w-id="922ac625-b9a7-817c-5d03-53ea47362dc2" style="opacity:0"
+                {% endfor %}
+              <!--<div id="faq-2" data-w-id="922ac625-b9a7-817c-5d03-53ea47362dc2" style="opacity:0"
                      class="faq-question-wrap"><a href="#" class="faq-question-bar w-inline-block">
                     <div data-w-id="7972038e-12e9-96f1-84de-9f0b627f22e7" data-animation-type="lottie"
                          data-src="https://uploads-ssl.webflow.com/5e8b47988a03b5ae935774be/5e9663f97c7a8b2a9fcf8b72_FAQ%20Arrow.json"
                          data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg"
                          data-default-duration="0.5" data-duration="0" data-ix2-initial-state="0"
                          class="lottie-animation-3"></div>
-                    <div class="question-title">How do you measure my commute emissions?</div>
+                    <div class="question-title">How long does the delivery take ?</div>
                 </a>
                     <div class="faq-content"><p class="paragraph">You tell us three important things: your starting
                         point, ending point, and how you get between the two. We do the rest by automatically
@@ -3297,9 +3296,10 @@
                          data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg"
                          data-default-duration="0.5" data-duration="0" data-ix2-initial-state="0"
                          class="lottie-animation-3"></div>
-                    <div class="question-title">How much CO2 equals one tree?</div>
+                    <div class="question-title">Is there a minimum order amount?</div>
                 </a>
-                    <div class="faq-content"><p class="paragraph">48 pounds or 21.8 kilograms.</p></div>
+                    <div class="faq-content"><p class="paragraph">Yes, there is a minimum order amount of
+                    Rs. 1500 to spread delivery costs over an economical number of units </p></div>
                 </div>
                 <div id="faq-4" data-w-id="d6f86acb-fcd0-94a1-4724-975d79e9cfca" style="opacity:0"
                      class="faq-question-wrap"><a href="#" class="faq-question-bar w-inline-block">
@@ -3372,7 +3372,7 @@
                         or all of their employees’ carbon offsets. If you think your company may be interested, please
                         <a href="http://www.commutifi.com/about" target="_blank" class="link">send them our way</a>.</p>
                     </div>
-                </div>
+                </div>-->
             </div>
 
         </div>

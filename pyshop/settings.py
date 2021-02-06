@@ -24,7 +24,7 @@ SECRET_KEY = 'g3f3p(xuh!c96psid)@%w@%_pke&@nc%c@)9)lxunx+afqi7n0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['jenefahealthymart.herokuapp.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['jenefahealthymart.herokuapp.com', '127.0.0.1']
 
 # Application definition
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # before static url
@@ -32,7 +32,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     "static",
 ]
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -49,8 +48,6 @@ INSTALLED_APPS = [
     'rest_framework',
 
 ]
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,10 +75,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'products.context_processors.categories_processor',
+                'products.context_processors.cart_items_count_processor',
             ],
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'pyshop.wsgi.application'
 
@@ -128,8 +129,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/login'
 LOGIN_URL = '/login'

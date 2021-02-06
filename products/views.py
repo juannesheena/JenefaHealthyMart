@@ -6,7 +6,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from products.forms import CreateUserForm
 from django.contrib import messages
-from products.models import Product, OrderItem, Order, BillingAddress, Payment, Offer, Category, TrendingProduct, Wallpaper
+from products.models import Product, OrderItem, Order, BillingAddress, Payment, Offer, Category, \
+    TrendingProduct, Wallpaper, Question
+from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
@@ -42,7 +44,22 @@ def index(request):
 
 
 def faq_user(request):
-    return render(request, 'FAQ.html')
+    question = Question.objects.all()
+    context ={'questions': question}
+    return render(request, 'FAQ.html', context)
+
+
+def about_us(request):
+    return render(request, 'aboutus.html')
+
+
+def privacy(request):
+    return render(request,'privacy.html')
+
+
+def profile(request):
+    user = User.objects.get(username=request.user)
+    return render(request, 'profile.html', {'user': user})
 
 
 class SearchView(ListView):
@@ -131,8 +148,8 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    # messages.info(request, "Logged out successfully!")
-    return redirect('/login')
+    messages.info(request, "Logged out successfully!")
+    return redirect('/')
 
 
 class PaymentView(View):
