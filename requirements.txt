@@ -19,6 +19,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
 pipenv==2020.11.15
+psycopg2-binary==2.8.6
 Python-dev==2.0.0.dev0
 pytz==2019.3
 requests==2.23.0

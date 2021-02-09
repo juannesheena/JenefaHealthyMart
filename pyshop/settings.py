@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'g3f3p(xuh!c96psid)@%w@%_pke&@nc%c@)9)lxunx+afqi7n0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['jenefahealthymart.herokuapp.com', '127.0.0.1']
 
@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'stripe',
     'rest_framework',
+    'psycopg2',
+
 
 ]
 
@@ -83,19 +85,28 @@ TEMPLATES = [
 ]
 
 
-
 WSGI_APPLICATION = 'pyshop.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-}
+}"""
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'jenefa_database',
+        'USER': 'juannesheena',
+        'PASSWORD': 'JSDT1958',
+        'HOST': 'jenefa-healthy-mart.chqx0uiwdwz0.us-east-2.rds.amazonaws.com',
+        'PORT': '5432'
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
