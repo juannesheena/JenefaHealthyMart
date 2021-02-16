@@ -95,10 +95,29 @@ label {
   background-color: #fefde5 !important;
 }
 
+/* direct pay styles*/
+@media only screen and (max-width: 600px) {
+#main-container{
+    padding-top:5vw;
+}
+}
+
+@media only screen and (min-width: 600px) {
+#main-container{
+    padding-top:10vw;
+}
+}
+@media only screen and (min-width: 1200px) {
+#main-container{
+    padding-top:7vw;
+}
+}
+
+
 </style>
 {% endblock extra_head %}
 {% block content %}
-
+<div class="container">
 <div class="">
     {% if messages %}
     {% for message in messages %}
@@ -113,13 +132,51 @@ label {
 </div>
 
 
-<div class="pb-2 text-center">
+<!--<div class="pb-2 text-center">
     <h2>Payment Validation</h2>
-</div>
-<div class="row">
-{% include 'cart_summary.html' %}
+</div>-->
+<div class="row" id="main-container">
 
-    <div class="col-md-8  bg-light">
+        {% include 'cart_summary.html' %}
+
+
+
+    <div class="col-md-8 order-md-1 " id="container-box">
+
+        <div id="card_container"></div>
+
+  <script src="https://cdn.directpay.lk/dev/v1/directpayCardPayment.js?v=1"></script>
+        <script>
+             DirectPayCardPayment.init({
+                    container: 'card_container', //<div id="card_container"></div>
+                    merchantId: 'RJ08974', //your merchant_id
+                    amount: "20.00",
+                    refCode: "DP12345", //unique reference code form merchant
+                    currency: 'LKR',
+                    type: 'ONE_TIME_PAYMENT',
+                    customerEmail: '{{ user.email }}',
+                    customerMobile: '+94760313434',
+                    description: 'test products',  //product or service description
+                    debug: true,
+                    responseCallback: responseCallback,
+                    errorCallback: errorCallback,
+                    logo: 'https://test.com/directpay_logo.png',
+                    apiKey: '0c5352407c55f63f553f2508ff3ba158'
+                });
+
+             //response callback.
+             function responseCallback(result) {
+                    console.log("successCallback-Client", result);
+                    alert(JSON.stringify(result));
+                }
+
+             //error callback
+             function errorCallback(result) {
+                    console.log("successCallback-Client", result);
+                    alert(JSON.stringify(result));
+               }
+        </script>
+<!----------
 
 
         <script src="https://js.stripe.com/v3/"></script>
@@ -155,22 +212,22 @@ label {
                                     pointer-events: none !important;
                                     font-size: 16px !important;">
                 </div>
-            </div>
+            </div>-->
 
-            <!-- Used to display form errors. -->
+            <!-- Used to display form errors. --><!--
             <div id="card-errors" role="alert"></div>
         </div>
 
         <button id="stripeBtn">Submit Payment</button>
-    </form>
+    </form>------------>
 
     </div>
 </div>
-
+</div>
 <!----------------javascript------------->
 
 
-
+<!-------
 <script type="text/javascript" nonce="">
 // Create a Stripe client.
   var stripe = Stripe('pk_test_Ib4yViIjijD9U75cfUQszbJS00OpaNOb4Y');
@@ -253,7 +310,7 @@ label {
     successElement.className = '';
     successElement.querySelector('.token').textContent = token.id;
   }
-</script>
+</script>------------>
 
 
 {% endblock content %}

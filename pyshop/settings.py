@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'g3f3p(xuh!c96psid)@%w@%_pke&@nc%c@)9)lxunx+afqi7n0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['jenefahealthymart.herokuapp.com', '127.0.0.1']
 
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products.apps.ProductsConfig',
-    'django_countries',
+    # 'django_countries',
     'django_filters',
     'crispy_forms',
     'stripe',
@@ -107,6 +107,12 @@ DATABASES = {
         'PORT': '5432'
     }
 }
+
+# Heroku aws link
+# postgres://juannesheena:JSDT1958@jenefa-healthy-mart.chqx0uiwdwz0.us-east-2.rds.amazonaws.com:5432/jenefa_database
+# postgres://USERNAME:PASSWORD@database url endpoint:PORT/DB NAME
+
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 

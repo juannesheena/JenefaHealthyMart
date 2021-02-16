@@ -1,7 +1,8 @@
 from django.db import models
 from django.shortcuts import reverse
 from django.conf import settings
-from django_countries.fields import CountryField
+# from django_countries.fields import CountryField
+# from phonenumber_field.modelfields import PhoneNumberField
 from django.db.models import Q
 
 
@@ -133,9 +134,11 @@ class Order(models.Model):
 class BillingAddress(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
+    phone_number = models.CharField(max_length=17)
     street_address = models.CharField(max_length=100)
     apartment_address = models.CharField(max_length=100)
-    country = CountryField(multiple=False)
+    # country = CountryField(multiple=False)
+    city = models.CharField(max_length=100)
     zip = models.CharField(max_length=100)
 
     # address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)

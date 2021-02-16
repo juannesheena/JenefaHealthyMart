@@ -23,7 +23,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 class BillingAddressAdmin(admin.ModelAdmin):
-    list_display = ('user', 'street_address', 'apartment_address', 'country', 'zip')
+    list_display = ('user', 'phone_number', 'street_address', 'apartment_address', 'city', 'zip')
 
 
 class PaymentAdmin(admin.ModelAdmin):

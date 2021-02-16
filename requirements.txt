@@ -1,10 +1,10 @@
 appdirs==1.4.3
-asgiref==3.3.1
+asgiref==3.2.10
 certifi==2020.4.5.1
 chardet==3.0.4
 click==7.1.2
 distlib==0.3.0
-Django==3.1.6
+Django==3.1.1
 django-bootstrap-form==3.4
 django-cart==1.0.4
 django-countries==6.1.2
@@ -18,10 +18,12 @@ idna==2.9
 itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
+phonenumbers==8.12.18
 pipenv==2020.11.15
+psycopg2==2.8.6
 psycopg2-binary==2.8.6
 Python-dev==2.0.0.dev0
-pytz==2019.3
+pytz==2020.1
 requests==2.23.0
 six==1.14.0
 sqlparse==0.3.1

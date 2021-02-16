@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 
-
 from products.forms import CreateUserForm
 from django.contrib import messages
 from products.models import Product, OrderItem, Order, BillingAddress, Payment, Offer, Category, \
@@ -45,7 +44,7 @@ def index(request):
 
 def faq_user(request):
     question = Question.objects.all()
-    context ={'questions': question}
+    context = {'questions': question}
     return render(request, 'FAQ.html', context)
 
 
@@ -54,12 +53,14 @@ def about_us(request):
 
 
 def privacy(request):
-    return render(request,'privacy.html')
+    return render(request, 'privacy.html')
 
 
 def profile(request):
     user = User.objects.get(username=request.user)
-    return render(request, 'profile.html', {'user': user})
+    billing = BillingAddress.objects.get(user=request.user)
+    context = {'user': user, 'billing': billing}
+    return render(request, 'profile.html', context)
 
 
 class SearchView(ListView):
@@ -254,45 +255,65 @@ class CheckoutView(View):
             return redirect("product_urls:checkout-page")
 
     def post(self, *args, **kwargs):
-        form = CheckoutForm(self.request.POST or None)
-        try:
-            order = Order.objects.get(user=self.request.user, ordered=False)
-            # print(self.request.POST)
-            if form.is_valid():
-                street_address = form.cleaned_data.get('street_address')
-                apartment_address = form.cleaned_data.get('apartment_address')
-                country = form.cleaned_data.get('country')
-                zip_no = form.cleaned_data.get('zip')
-                # same_billing_address = form.cleaned_data.get('same_billing_address')
-                # save_info = form.cleaned_data.get('save_info')
-                payment_option = form.cleaned_data.get('payment_option')
-                billing_address = BillingAddress(
-                    user=self.request.user,
-                    street_address=street_address,
-                    apartment_address=apartment_address,
-                    country=country,
-                    zip=zip_no,
-                    # same_billing_address=same_billing_address,
-                    # save_info=save_info
-                )
-                billing_address.save()
-                order.billing_address = billing_address
-                order.save()
+        order = Order.objects.get(user=self.request.user, ordered=False)
+        if self.request.method == 'POST':
+            form = CheckoutForm(self.request.POST or None)
+            try:
 
-                if payment_option == 'C':
-                    return redirect('product_urls:payment-page', payment_option='stripe')
-                elif payment_option == 'P':
-                    return redirect('product_urls:payment-page', payment_option='paypal')
-                else:
-                    messages.warning(
-                        self.request, "Invalid payment option selected")
-                    return redirect("product_urls:checkout-page")
+                # print(self.request.POST)
+                if form.is_valid():
+                    phone_number = form.cleaned_data.get('phone_number')
+                    street_address = form.cleaned_data.get('street_address')
+                    apartment_address = form.cleaned_data.get('apartment_address')
+                    city = form.cleaned_data.get('city')
+                    zip_no = form.cleaned_data.get('zip')
+                    # same_billing_address = form.cleaned_data.get('same_billing_address')
+                    # save_info = form.cleaned_data.get('save_info')
+                    payment_option = form.cleaned_data.get('payment_option')
+                    billing_address = BillingAddress(
+                        user=self.request.user,
+                        phone_number=phone_number,
+                        street_address=street_address,
+                        apartment_address=apartment_address,
+                        city=city,
+                        zip=zip_no,
+                        # same_billing_address=same_billing_address,
+                        # save_info=save_info
+                    )
+                    billing_address.save()
+                    order.billing_address = billing_address
+                    order.save()
 
-        except ObjectDoesNotExist:
-            messages.warning(self.request, "You do not have an active order")
-            return redirect("product_urls:cart-page")
-        messages.warning(self.request, "Please fill up the entire form")
-        return redirect("product_urls:checkout-page")
+                    if payment_option == 'C':
+                        user = User.objects.get(username=self.request.user)
+                        context = {'order': order, 'user': user}
+                        return redirect('product_urls:payment-page', context, payment_option='direct_pay')
+                    elif payment_option == 'D':
+                        return redirect('product_urls:payment-page', payment_option='cash')
+                    else:
+                        messages.warning(
+                            self.request, "Please select a payment method")
+                        return redirect("product_urls:checkout-page")
+                        # return redirect("product_urls:checkout-page")
+                        # return render(self.request, 'checkout.html', {'form': form})
+
+            except ObjectDoesNotExist:
+                messages.warning(self.request, "You do not have an active order")
+                return redirect("product_urls:cart-page")
+            # messages.warning(self.request, "Please fill up the entire form")
+            # return redirect("product_urls:checkout-page")
+
+        else:
+            # messages.warning(self.request, "Please fill up the entire form")
+            #  form = CheckoutForm()
+            print('something went wrong')
+
+        context = {'form': form,
+                   'couponform': CouponForm,
+                   'order': order,
+                   'DISPLAY_COUPON_FORM': True
+                   }
+        return render(self.request, 'checkout.html', context)
 
 
 class ItemDetailView(DetailView):
